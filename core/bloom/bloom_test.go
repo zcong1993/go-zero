@@ -100,3 +100,8 @@ func TestRedisBitSet_set(t *testing.T) {
 	rbs = newRedisBitSet(store, "test", 64)
 	assert.Error(t, rbs.set(ctx, []uint{0, 1, 2}))
 }
+
+func TestScriptSha(t *testing.T) {
+	assert.Equal(t, "58a520bba71a195718b5b094fe84e0d50f230fc3", setScript.Hash())
+	assert.Equal(t, "6d86f823bbc4cb2c792e331781017700f514af1c", testScript.Hash())
+}

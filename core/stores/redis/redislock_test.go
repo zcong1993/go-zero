@@ -63,3 +63,8 @@ func TestRedisLock_Expired(t *testing.T) {
 		assert.NotNil(t, err)
 	})
 }
+
+func TestScriptSha(t *testing.T) {
+	assert.Equal(t, "dbecad63894903ddf755d05d73a3eb7432ef75c0", lockScript.Hash())
+	assert.Equal(t, "e04ea1352c46ae16a15753d4960bee821bf3b3fa", delScript.Hash())
+}

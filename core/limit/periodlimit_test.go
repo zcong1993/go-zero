@@ -73,3 +73,7 @@ func TestQuotaFull(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, HitQuota, val)
 }
+
+func TestPeriodScriptSha(t *testing.T) {
+	assert.Equal(t, "3632c0f415619f6de5a5840207b1498fda08317c", periodScript.Hash())
+}

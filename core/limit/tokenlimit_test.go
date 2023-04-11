@@ -107,3 +107,7 @@ func TestTokenLimit_TakeBurst(t *testing.T) {
 
 	assert.True(t, allowed >= burst)
 }
+
+func TestScriptSha(t *testing.T) {
+	assert.Equal(t, "97f5a6625d0254eb4d0f5d9dcce7d1ddc936155d", script.Hash())
+}
