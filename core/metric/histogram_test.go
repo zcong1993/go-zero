@@ -4,8 +4,10 @@ import (
 	"strings"
 	"testing"
 
+	prom "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/testutil"
 	"github.com/stretchr/testify/assert"
+	"github.com/zeromicro/go-zero/core/prometheus"
 )
 
 func TestNewHistogramVec(t *testing.T) {
@@ -48,4 +50,30 @@ func TestHistogramObserve(t *testing.T) {
 
 	err := testutil.CollectAndCompare(hv.histogram, strings.NewReader(metadata+val))
 	assert.Nil(t, err)
+}
+
+func Test_promHistogramVec_ObserveWithExemplar(t *testing.T) {
+	prometheus.Enable()
+	assert.NotPanics(t, func() {
+		histogramVec := NewHistogramVec(&HistogramVecOpts{
+			Name:    "counts",
+			Help:    "rpc server requests duration(ms).",
+			Buckets: []float64{1, 2, 3},
+			Labels:  []string{"method"},
+		})
+		histogramVec.ObserveWithExemplar(2, prom.Labels{"abc": "ced"}, "/Users")
+	})
+}
+
+func Test_promHistogramVec_ObserveWithTraceExemplar(t *testing.T) {
+	prometheus.Enable()
+	assert.NotPanics(t, func() {
+		histogramVec := NewHistogramVec(&HistogramVecOpts{
+			Name:    "counts",
+			Help:    "rpc server requests duration(ms).",
+			Buckets: []float64{1, 2, 3},
+			Labels:  []string{"method"},
+		})
+		histogramVec.ObserveWithTraceExemplar(2, "abc", "/Users")
+	})
 }

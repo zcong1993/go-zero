@@ -10,4 +10,7 @@ type Config struct {
 	EnableMetrics  bool   `json:",default=true"`
 	EnablePprof    bool   `json:",default=true"`
 	HealthResponse string `json:",default=OK"`
+	// EnableOpenMetrics is a flag for prometheus http.
+	// This is required for some prometheus features, eg: exemplar.
+	EnableOpenMetrics bool `json:",optional"`
 }
