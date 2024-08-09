@@ -56,7 +56,7 @@ func Test_promHistogramVec_ObserveWithExemplar(t *testing.T) {
 	prometheus.Enable()
 	assert.NotPanics(t, func() {
 		histogramVec := NewHistogramVec(&HistogramVecOpts{
-			Name:    "counts",
+			Name:    "counts_2",
 			Help:    "rpc server requests duration(ms).",
 			Buckets: []float64{1, 2, 3},
 			Labels:  []string{"method"},
@@ -69,7 +69,7 @@ func Test_promHistogramVec_ObserveWithTraceExemplar(t *testing.T) {
 	prometheus.Enable()
 	assert.NotPanics(t, func() {
 		histogramVec := NewHistogramVec(&HistogramVecOpts{
-			Name:    "counts",
+			Name:    "counts_3",
 			Help:    "rpc server requests duration(ms).",
 			Buckets: []float64{1, 2, 3},
 			Labels:  []string{"method"},
